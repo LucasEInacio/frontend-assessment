@@ -1,9 +1,10 @@
 import React from "react";
+import House from "../../container/house";
 
 const MainContent = () => {
 
-    return (<div className='MainContent'>
-        <h2>Main Content</h2>
+    return (<div className='mainContent'>
+        <House />
     </div>);
 };
 
