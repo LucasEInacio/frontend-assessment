@@ -6,14 +6,14 @@ const HouseView = (props) => {
         <>
             <div>
                 <div>
-                    <h2>{props.house.title}</h2>
-                    <p>{props.house.location}</p>
+                    <h2>{props.house.Title}</h2>
+                    <p>{props.house.Location}</p>
                 </div>
                 <div>
                     <h2>{props.house['Sale Price']}</h2>
-                    <p>{ 'Date Listed: ' + props.house.DateListed}</p>
+                    <p>{'Date Listed: ' + new Date(props.house.DateListed).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })}</p>
                 </div>
-                <img src={props.house.PictureURL} alt={props.house.title}></img>
+                <img src={props.house.PictureURL} alt={props.house.Title}></img>
                 <div>
                     <h2>{props.house.Bedrooms}</h2>
                     <p>BED</p>

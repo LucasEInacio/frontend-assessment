@@ -80,3 +80,30 @@
         }
     }
 }
+
+.filter{
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    .filterItem{
+        width:20%;
+    }
+    .priceRange {
+        width: 150px;
+        display: inline-block;
+    }
+    .numberInput{
+        width: 50px
+    }
+    p{
+        margin-right: 10px;
+        display:inline-block;
+    }
+}
+
+.title{
+    color: white;
+}
