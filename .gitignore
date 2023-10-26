@@ -1,5 +1,35 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#Ignore files build by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.log.*
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+.vs/
+
 # dependencies
 /node_modules
 /.pnp
