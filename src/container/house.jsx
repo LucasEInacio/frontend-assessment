@@ -7,7 +7,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 
 const House = (props) => {
-    const [filteredData, setfilteredData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState({
         bedrooms: '',
@@ -24,7 +24,7 @@ const House = (props) => {
             .then((response) => response.json())
             .then((response) => {
                 setData(response ?? []);
-                setfilteredData(response ?? []);
+                setFilteredData(response ?? []);
                 let maxPrice = getMaxPrice(response);
                 setMaxPrice(maxPrice);
                 setFilter({ ...filter, price: maxPrice });
@@ -35,7 +35,7 @@ const House = (props) => {
     }, []);
 
     const cardItems = filteredData.map((item) =>
-        <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} data={data}  />
+        <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} />
     );
 
     const getMaxPrice = (list) => {
@@ -54,7 +54,7 @@ const House = (props) => {
 
     const getFilter = () => {
         return (
-            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setfilteredData={setfilteredData} maxPrice={maxPrice} data={data} /> : <></>
+            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setFilteredData={setFilteredData} maxPrice={maxPrice} data={data} /> : <></>
         )
     };
 
@@ -62,7 +62,7 @@ const House = (props) => {
         selectedHouse ?
             <div className='houseContainer'>
                 <button className='filterBtn' onClick={getBack}>Back</button>
-                <HouseView house={selectedHouse} />
+                <HouseView house={selectedHouse} setSelectedHouse={setSelectedHouse} data={data} setData={setData} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
             :
             <>

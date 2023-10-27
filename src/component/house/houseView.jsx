@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import './houseView.scss';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import WithNotify from '../_highOrder/withNotify';
+import Validator from 'validator';
 
 const HouseView = (props) => {
-    const [liked, setLiked] = useState(false);
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -12,8 +13,52 @@ const HouseView = (props) => {
         comments: ''
     });
 
-    const validateForm = () => {
+    const likeHouse = () => {
+        let selectedHouse = { ...props.house, liked: !props.house.liked };
+        props.setSelectedHouse(selectedHouse);
+        props.data.forEach(x => { if (x.Id === selectedHouse.Id) x.liked = !x.liked; });
+        props.setData(props.data);
+    };
 
+    const contactNow = (event) => {
+        event.preventDefault();
+
+        if (validateForm())
+            props.notify('Message sent successfully', 'success');
+    };
+
+    const validateForm = () => {
+        if (!form.name.trim()) {
+            props.notify('Name required!', 'error');
+            return false;
+        }
+
+        if (!form.email.trim()) {
+            props.notify('Email required!', 'error');
+            return false;
+        }
+
+        if (!Validator.isEmail(form.email)) {
+            props.notify('Email not valid!', 'error');
+            return false;
+        }
+
+        if (!form.phone.trim()) {
+            props.notify('Phone required!', 'error');
+            return false;
+        }
+
+        if (!Validator.isMobilePhone(form.phone)) {
+            props.notify('Phone not valid!', 'error');
+            return false;
+        }
+
+        if (!form.comments.trim()) {
+            props.notify('Comments required!', 'error');
+            return false;
+        }
+
+        return true;
     };
 
     return (
@@ -58,8 +103,8 @@ const HouseView = (props) => {
             </div>
             <div className='contact'>
                 <div className='likeDiv'>
-                    <button className='saveBtn' onClick={() => { setLiked(!liked) }}>
-                        { liked ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+                    <button className='saveBtn' onClick={() => { likeHouse(); }}>
+                        { props.house.liked ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
                         Save Property
                     </button>
                 </div>
@@ -70,7 +115,7 @@ const HouseView = (props) => {
                         <input className='formField' placeholder='Phone Number *' type='number' value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })}></input>
                         <textarea className='formFieldMultiline' rows="5" cols="30" placeholder='Comments *' value={form.comments} onChange={(event) => setForm({ ...form, comments: event.target.value })}></textarea>
 
-                        <button className='contactBtn' onClick={(event) => { event.preventDefault(); alert('Contact Done!' + JSON.stringify(form)) }} >
+                        <button className='contactBtn' onClick={contactNow} >
                             Contact Now
                         </button>
                     </form>
@@ -80,4 +125,4 @@ const HouseView = (props) => {
     );
 };
 
-export default HouseView;
+export default WithNotify(HouseView);
