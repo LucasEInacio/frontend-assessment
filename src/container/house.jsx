@@ -54,7 +54,7 @@ const House = (props) => {
 
     const getFilter = () => {
         return (
-            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setfilteredData={setfilteredData} maxPrice={maxPrice} /> : <></>
+            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setfilteredData={setfilteredData} maxPrice={maxPrice} data={data} /> : <></>
         )
     };
 
