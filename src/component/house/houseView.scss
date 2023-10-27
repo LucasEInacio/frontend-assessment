@@ -4,7 +4,7 @@
 }
 
 .housePanel {
-    width: 70%;
+    width: 60%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -39,6 +39,55 @@
 }
 
 .contact {
-    border: 5px;
-    width: 100%;
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: start;
+}
+
+.likeDiv {
+    text-align: right;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.saveBtn {
+    margin-right: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactForm {
+    border: 1px solid white;
+    width: 90%;
+    height: 400px;
+}
+
+.contactBtn {
+    @extend .saveBtn;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formField {
+    width: 80%;
+    height: 30px;
+    margin: 15px;
+}
+
+.formFieldMultiline {
+    @extend .formField;
+    height: 100px;
 }

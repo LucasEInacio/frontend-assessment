@@ -1,7 +1,20 @@
-import React from "react"; 
-import './houseView.scss'
+import React, { useState } from "react"; 
+import './houseView.scss';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const HouseView = (props) => {
+    const [liked, setLiked] = useState(false);
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        comments: ''
+    });
+
+    const validateForm = () => {
+
+    };
 
     return (
         <div className='houseView'>
@@ -44,7 +57,24 @@ const HouseView = (props) => {
                 </div>
             </div>
             <div className='contact'>
+                <div className='likeDiv'>
+                    <button className='saveBtn' onClick={() => { setLiked(!liked) }}>
+                        { liked ? <FavoriteIcon /> : <FavoriteBorderIcon /> }
+                        Save Property
+                    </button>
+                </div>
+                <div className='contactForm'>
+                    <form>
+                        <input className='formField' placeholder='Full Name *' value={form.name} onChange={(event) => setForm({...form, name: event.target.value})}></input>
+                        <input className='formField' placeholder='Email *' type='email' value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })}></input>
+                        <input className='formField' placeholder='Phone Number *' type='number' value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })}></input>
+                        <textarea className='formFieldMultiline' rows="5" cols="30" placeholder='Comments *' value={form.comments} onChange={(event) => setForm({ ...form, comments: event.target.value })}></textarea>
 
+                        <button className='contactBtn' onClick={(event) => { event.preventDefault(); alert('Contact Done!' + JSON.stringify(form)) }} >
+                            Contact Now
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );
