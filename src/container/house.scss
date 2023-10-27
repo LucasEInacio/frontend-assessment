@@ -81,8 +81,22 @@
     }
 }
 
+.filterBtn {
+    margin-right: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    overflow: hidden;
+}
+
 .filter{
-    width:100%;
+    width:80%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -90,10 +104,17 @@
     color: white;
     .filterItem{
         width:20%;
+        button {
+            @extend .filterBtn;
+        }
+        button:hover {
+            background-color: orange;
+        }
     }
     .priceRange {
         width: 150px;
         display: inline-block;
+        vertical-align: middle;
     }
     .numberInput{
         width: 50px
@@ -106,4 +127,8 @@
 
 .title{
     color: white;
+}
+
+.houseContainer{
+    width: 70%;
 }

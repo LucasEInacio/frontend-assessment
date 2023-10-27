@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Card from "../component/card";
 import './house.scss';
-import { Slider } from '@mui/material';
-import HouseView from "../component/houseView";
+import HouseView from "../component/house/houseView";
+import HouseFilter from "../component/house/houseFilter";
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Button } from '@mui/material';
 
 const House = (props) => {
     const [filteredData, setfilteredData] = useState([]);
@@ -15,6 +17,7 @@ const House = (props) => {
     });
     const [maxPrice, setMaxPrice] = useState(0);
     const [selectedHouse, setSelectedHouse] = useState(null);
+    const [openFilter, setOpenFilter] = useState(false);
 
     useEffect(() => {
         fetch('/cdn.number8.com/LA/listings.json')
@@ -31,6 +34,10 @@ const House = (props) => {
             });
     }, []);
 
+    const cardItems = filteredData.map((item) =>
+        <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} data={data}  />
+    );
+
     const getMaxPrice = (list) => {
         if (list) {
             let prices = list.map((item) => item['Sale Price']);
@@ -41,74 +48,30 @@ const House = (props) => {
         return 0;
     };
 
-    const cardItems = filteredData.map((item) =>
-        <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} />
-    );
-
-    const search = () => {
-        let filtered = data.filter(x => {
-            if (
-                (x.Bedrooms === filter.bedrooms || filter.bedrooms === '')
-                && (x.Bathrooms === filter.bathrooms || filter.bathrooms === '')
-                && (x.Parking === filter.parking || filter.parking === '')
-                && (x['Sale Price'] <= filter.price)
-            )
-                return x;
-            return null;
-        });
-
-        setfilteredData(filtered);
-    };
-
-    const clearSearch = () => {
-        setFilter({
-            bedrooms: '',
-            bathrooms: '',
-            parking: '',
-            price: getMaxPrice(data)
-        });
-        setfilteredData(data);
-    };
-
     const getBack = () => {
         setSelectedHouse(null);
     };
 
+    const getFilter = () => {
+        return (
+            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setfilteredData={setfilteredData} maxPrice={maxPrice} /> : <></>
+        )
+    };
+
     return (
-        selectedHouse?
-            <div>
-                <button onClick={getBack}>Back</button>
+        selectedHouse ?
+            <div className='houseContainer'>
+                <button className='filterBtn' onClick={getBack}>Back</button>
                 <HouseView house={selectedHouse} />
             </div>
             :
             <>
                 <h2 className='title'>Houses Available</h2>
-                <div className='filter'>
-                    <div className='filterItem'>
-                        <p>Bedrooms: </p>
-                        <input className='numberInput' type="number" id="bedroom" name="bedroom" min="1" value={filter.bedrooms} onChange={(event) => setFilter({ ...filter, bedrooms: event.target.value}) } />
-                    </div>
-                    <div className='filterItem'>
-                        <p>Bathrooms: </p>
-                        <input className='numberInput' type="number" id="bathroom" name="bathroom" min="1" value={filter.bathrooms} onChange={(event) => setFilter({ ...filter, bathrooms: event.target.value })} />
-                    </div>
-                    <div className='filterItem'>
-                        <p>Parking: </p>
-                        <input className='numberInput' type="number" id="parking" name="parking" min="1" value={filter.parking} onChange={(event) => setFilter({ ...filter, parking: event.target.value })} />
-                    </div>
-                    <div className='filterItem'>
-                        <p>Price Range:</p>
-                        <Slider
-                            className='priceRange'
-                            valueLabelDisplay="on"
-                            max={maxPrice}
-                            value={filter.price}
-                            onChange={(event) => setFilter({ ...filter, price: event.target.value })} >
-                        </Slider>
-                    </div>
-                    <button onClick={search}>Search</button>
-                    <button onClick={clearSearch}>Clear</button>
-                </div>
+                <Button color='primary' onClick={() => setOpenFilter(!openFilter)}>
+                    <FilterListIcon />
+                    Filter
+                </Button>
+                {getFilter()}
                 <div className='container'>
                     {cardItems}
                 </div>

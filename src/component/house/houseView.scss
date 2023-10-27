@@ -1,0 +1,44 @@
+.houseView{
+    display: flex;
+    color: white;
+}
+
+.housePanel {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .panelHeaderLeft {
+        width: 50%;
+        text-align: left;
+    }
+
+    .panelHeaderRight {
+        width: 50%;
+        text-align: right;
+    }
+
+    .panelImg {
+        width: 100%;
+    }
+
+    .panelTable {
+        width: 100%;
+        display: flex;
+        border: 1px solid white;
+
+        .panelItem {
+            width: 20%;
+        }
+    }
+
+    .panelDescription{
+        text-align: left;
+    }
+}
+
+.contact {
+    border: 5px;
+    width: 100%;
+}
