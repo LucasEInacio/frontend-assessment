@@ -1,11 +1,13 @@
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 import './houseView.scss';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WithNotify from '../_highOrder/withNotify';
 import Validator from 'validator';
+import HouseModal from './houseModal';
 
 const HouseView = (props) => {
+    const [modalOpen, setModalOpen] = useState(false);
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -18,6 +20,8 @@ const HouseView = (props) => {
         props.setSelectedHouse(selectedHouse);
         props.data.forEach(x => { if (x.Id === selectedHouse.Id) x.liked = !x.liked; });
         props.setData(props.data);
+
+        setModalOpen(true);
     };
 
     const contactNow = (event) => {
@@ -61,8 +65,15 @@ const HouseView = (props) => {
         return true;
     };
 
+    useEffect(() => {
+        let selected = props.data.find(x => x.Id === props.house.Id);
+        if (selected && selected.liked !== props.house.liked)
+            props.setSelectedHouse(selected);
+    }, [props.data, JSON.stringify(props.data)]);
+
     return (
         <div className='houseView'>
+            <HouseModal open={modalOpen} setOpen={setModalOpen} data={props.data} setData={props.setData} />
             <div className='housePanel'>
                 <div className='panelHeaderLeft'>
                     <h2>{props.house.Title}</h2>

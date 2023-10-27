@@ -6,16 +6,16 @@ const HouseFilter = (props) => {
     const search = () => {
         let filtered = props.data.filter(x => {
             if (
-                (x.Bedrooms === props.filter.bedrooms || props.filter.bedrooms === '')
-                && (x.Bathrooms === props.filter.bathrooms || props.filter.bathrooms === '')
-                && (x.Parking === props.filter.parking || props.filter.parking === '')
+                (x.Bedrooms == props.filter.bedrooms || props.filter.bedrooms === '')
+                && (x.Bathrooms == props.filter.bathrooms || props.filter.bathrooms === '')
+                && (x.Parking == props.filter.parking || props.filter.parking === '')
                 && (x['Sale Price'] <= props.filter.price)
             )
                 return x;
             return null;
         });
 
-        props.setfilteredData(filtered);
+        props.setFilteredData(filtered);
     };
 
     const clearSearch = () => {
@@ -25,7 +25,7 @@ const HouseFilter = (props) => {
             parking: '',
             price: getMaxPrice(props.data)
         });
-        props.setfilteredData(props.data);
+        props.setFilteredData(props.data);
     };
 
     const getMaxPrice = (list) => {

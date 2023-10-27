@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import Card from "../component/card";
 import './house.scss';
 import HouseView from "../component/house/houseView";
@@ -65,7 +65,7 @@ const House = (props) => {
                 <HouseView house={selectedHouse} setSelectedHouse={setSelectedHouse} data={data} setData={setData} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
             :
-            <>
+            <Fragment>
                 <h2 className='title'>Houses Available</h2>
                 <Button color='primary' onClick={() => setOpenFilter(!openFilter)}>
                     <FilterListIcon />
@@ -75,7 +75,7 @@ const House = (props) => {
                 <div className='container'>
                     {cardItems}
                 </div>
-            </>
+            </Fragment>
     );
 }
 
