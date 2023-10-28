@@ -26,7 +26,8 @@ Now, I am going to explain briefly my choices:
 ## Install and Run
 
 After cloning the repository;
-In the project directory, you can run npm start.
+In the project directory, you can run npm install.
+Then run npm start.
 
 ## Credits
 
