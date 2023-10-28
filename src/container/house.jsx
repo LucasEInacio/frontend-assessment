@@ -5,11 +5,12 @@ import HouseView from "../component/house/houseView";
 import HouseFilter from "../component/house/houseFilter";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
-import AtomicSpinner from 'atomic-spinner'
+import AtomicSpinner from 'atomic-spinner';
+import { setHouses } from '../store/features/houseSlice';
+import { useDispatch } from 'react-redux';
 
 const House = (props) => {
     const [filteredData, setFilteredData] = useState([]);
-    const [data, setData] = useState([]);
     const [filter, setFilter] = useState({
         bedrooms: '',
         bathrooms: '',
@@ -20,12 +21,13 @@ const House = (props) => {
     const [selectedHouse, setSelectedHouse] = useState(null);
     const [openFilter, setOpenFilter] = useState(false);
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetch('/cdn.number8.com/LA/listings.json')
             .then((response) => response.json())
             .then((response) => {
-                setData(response ?? []);
+                dispatch(setHouses(response));
                 setFilteredData(response ?? []);
                 let maxPrice = getMaxPrice(response);
                 setMaxPrice(maxPrice);
@@ -63,7 +65,7 @@ const House = (props) => {
 
     const getFilter = () => {
         return (
-            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setFilteredData={setFilteredData} maxPrice={maxPrice} data={data} /> : <></>
+            openFilter ? <HouseFilter filter={filter} setFilter={setFilter} setFilteredData={setFilteredData} maxPrice={maxPrice} /> : <></>
         )
     };
 
@@ -71,7 +73,7 @@ const House = (props) => {
         selectedHouse ?
             <div className='houseContainer'>
                 <button className='filterBtn' onClick={getBack}>Back</button>
-                <HouseView house={selectedHouse} setSelectedHouse={setSelectedHouse} data={data} setData={setData} filteredData={filteredData} setFilteredData={setFilteredData} />
+                <HouseView house={selectedHouse} setSelectedHouse={setSelectedHouse} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
             :
             <Fragment>

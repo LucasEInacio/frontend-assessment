@@ -1,10 +1,11 @@
 import React from "react";
 import { Slider } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const HouseFilter = (props) => {
-
+    const houses = useSelector((state) => state.house.houses);
     const search = () => {
-        let filtered = props.data.filter(x => {
+        let filtered = houses.filter(x => {
             if (
                 (x.Bedrooms == props.filter.bedrooms || props.filter.bedrooms === '')
                 && (x.Bathrooms == props.filter.bathrooms || props.filter.bathrooms === '')
@@ -23,9 +24,9 @@ const HouseFilter = (props) => {
             bedrooms: '',
             bathrooms: '',
             parking: '',
-            price: getMaxPrice(props.data)
+            price: getMaxPrice(houses)
         });
-        props.setFilteredData(props.data);
+        props.setFilteredData(houses);
     };
 
     const getMaxPrice = (list) => {

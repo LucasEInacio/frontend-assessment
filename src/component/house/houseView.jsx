@@ -5,21 +5,25 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import WithNotify from '../_highOrder/withNotify';
 import Validator from 'validator';
 import HouseModal from './houseModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { setHouses } from '../../store/features/houseSlice';
 
 const HouseView = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const houses = useSelector((state) => state.house.houses);
     const [form, setForm] = useState({
         name: '',
         email: '',
         phone: '',
         comments: ''
     });
+    const dispatch = useDispatch();
 
     const likeHouse = () => {
         let selectedHouse = { ...props.house, liked: !props.house.liked };
         props.setSelectedHouse(selectedHouse);
-        props.data.forEach(x => { if (x.Id === selectedHouse.Id) x.liked = !x.liked; });
-        props.setData(props.data);
+        let houseList = houses.slice().map((x) => { if (x.Id === selectedHouse.Id) return { ...x, liked: !x.liked }; return x; });
+        dispatch(setHouses(houseList));
 
         setModalOpen(true);
     };
@@ -66,14 +70,14 @@ const HouseView = (props) => {
     };
 
     useEffect(() => {
-        let selected = props.data.find(x => x.Id === props.house.Id);
+        let selected = houses.find(x => x.Id === props.house.Id);
         if (selected && selected.liked !== props.house.liked)
             props.setSelectedHouse(selected);
-    }, [props.data, JSON.stringify(props.data)]);
+    }, [houses, JSON.stringify(houses)]);
 
     return (
         <div className='houseView'>
-            <HouseModal open={modalOpen} setOpen={setModalOpen} data={props.data} setData={props.setData} />
+            <HouseModal open={modalOpen} setOpen={setModalOpen} />
             <div className='housePanel'>
                 <div className='panelHeaderLeft'>
                     <h2>{props.house.Title}</h2>

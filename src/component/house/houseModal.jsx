@@ -4,23 +4,27 @@ import { List, ListItem, ListItemButton, ListItemAvatar, Avatar, ListItemText } 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WithNotify from '../_highOrder/withNotify';
 import './houseView.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { setHouses } from '../../store/features/houseSlice';
 
 const HouseModal = (props) => {
     const [liked, setLiked] = useState([]);
+    const houses = useSelector((state) => state.house.houses);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         filterLiked();
-    }, [props.data, JSON.stringify(props.data)]);
+    }, [houses, JSON.stringify(houses)]);
 
     const unlike = (id) => {
-        props.data.find(x => x.Id === id).liked = false;
-        props.setData(props.data);
+        let houseList = houses.slice().map((x) => { if (x.Id === id) return { ...x, liked: false }; return x; });
+        dispatch(setHouses(houseList));
         filterLiked();
         props.notify('House unliked!', 'success');
     };
 
     const filterLiked = () => {
-        setLiked(props.data?.filter(x => x.liked) || []);
+        setLiked(houses?.filter(x => x.liked) || []);
     }
 
     return (
@@ -35,6 +39,7 @@ const HouseModal = (props) => {
                         <ListItem
                             key={value.Id}
                             disablePadding
+                            onClick={() => { unlike(value.Id) }}
                         >
                             <ListItemButton>
                                 <ListItemAvatar>
