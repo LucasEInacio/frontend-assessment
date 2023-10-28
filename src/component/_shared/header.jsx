@@ -1,6 +1,7 @@
 import React from "react";
 import './site.scss';
 import Logo from '../../logo.svg';
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
     return (<>
@@ -10,8 +11,8 @@ const Header = (props) => {
                     <img src={Logo} alt='React Logo'></img>
                 </div>
                 <ul>
-                    <li>Home</li>
-                    <li>Houses</li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/House">Houses</Link></li>
                 </ul>
                 <div>
                 </div>

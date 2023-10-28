@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ModalView from '../_shared/modalView';
 import { List, ListItem, ListItemButton, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import WithNotify from '../_highOrder/withNotify';
 import './houseView.scss';
 
 const HouseModal = (props) => {
@@ -15,6 +16,7 @@ const HouseModal = (props) => {
         props.data.find(x => x.Id === id).liked = false;
         props.setData(props.data);
         filterLiked();
+        props.notify('House unliked!', 'success');
     };
 
     const filterLiked = () => {
@@ -56,4 +58,4 @@ const HouseModal = (props) => {
     );
 }
 
-export default HouseModal;
+export default WithNotify(HouseModal);

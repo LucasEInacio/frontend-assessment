@@ -1,10 +1,11 @@
 import React, { useEffect, useState, Fragment } from "react";
-import Card from "../component/card";
+import Card from "../component/card/card";
 import './house.scss';
 import HouseView from "../component/house/houseView";
 import HouseFilter from "../component/house/houseFilter";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
+import AtomicSpinner from 'atomic-spinner'
 
 const House = (props) => {
     const [filteredData, setFilteredData] = useState([]);
@@ -18,6 +19,7 @@ const House = (props) => {
     const [maxPrice, setMaxPrice] = useState(0);
     const [selectedHouse, setSelectedHouse] = useState(null);
     const [openFilter, setOpenFilter] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('/cdn.number8.com/LA/listings.json')
@@ -28,15 +30,22 @@ const House = (props) => {
                 let maxPrice = getMaxPrice(response);
                 setMaxPrice(maxPrice);
                 setFilter({ ...filter, price: maxPrice });
+                setLoading(false);
             })
             .catch((error) => {
+                setLoading(false);
                 alert(error.message);
             });
     }, []);
 
-    const cardItems = filteredData.map((item) =>
-        <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} />
-    );
+    const cardItems = () => {
+        if (filteredData.length === 0)
+            return <h2>No Results</h2>;
+
+        return filteredData.map((item) =>
+            <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} />
+        );
+    }; 
 
     const getMaxPrice = (list) => {
         if (list) {
@@ -72,9 +81,13 @@ const House = (props) => {
                     Filter
                 </Button>
                 {getFilter()}
-                <div className='container'>
-                    {cardItems}
-                </div>
+                {
+                    loading ? <div className='atomicSpiner'><AtomicSpinner className='atomicSpiner' /></div>
+                        :
+                        <div className='container'>
+                            {cardItems()}
+                        </div>
+                }
             </Fragment>
     );
 }
