@@ -21,12 +21,13 @@ Now, I am going to explain briefly my choices:
 - React Redux for managing variable state across multiple components;
 - High-Order Component used to add a notification system that can be used by the entire application;
 - Children prop implemented in a shared component (e.g. ModalView) so the more specific components can coordinate some functions;
-- A lot of Material UI components were used, and Sass to manipulate the CSS.
+- A lot of Material UI components were used, and Sass to manipulate the CSS;
+- I've structured the project folders according to the best practices, segregating components, containers, redux store, etc.
 
 ## Install and Run
 
 After cloning the repository;  
-In the project directory, you can run npm install.  
+In the project directory, you can run npm install;  
 Then run npm start.
 
 ## Credits

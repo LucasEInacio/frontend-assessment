@@ -1,5 +1,5 @@
 import React from "react";
-import House from "../../container/house";
+import House from "../../container/house/house";
 import Home from "../../container/home";
 import { Routes, Route } from "react-router-dom";
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, Fragment } from "react";
-import Card from "../component/card/card";
+import Card from "../../component/card/card";
 import './house.scss';
-import HouseView from "../component/house/houseView";
-import HouseFilter from "../component/house/houseFilter";
+import HouseView from "../../component/house/houseView";
+import HouseFilter from "../../component/house/houseFilter";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 import AtomicSpinner from 'atomic-spinner';
-import { setHouses, fetchHouses } from '../store/features/houseSlice';
+import { setHouses, fetchHouses } from '../../store/features/houseSlice';
 import { useDispatch } from 'react-redux';
 
 const House = (props) => {
