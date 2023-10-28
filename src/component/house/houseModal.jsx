@@ -29,7 +29,7 @@ const HouseModal = (props) => {
 
     return (
         <ModalView open={props.open} setOpen={props.setOpen} >
-            <h2>Houses liked</h2>
+            <h2>Saved Houses</h2>
             <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {
                     liked.length === 0 ? <p>No Houses Liked</p> : 

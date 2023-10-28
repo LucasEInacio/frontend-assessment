@@ -6,7 +6,7 @@ import HouseFilter from "../component/house/houseFilter";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 import AtomicSpinner from 'atomic-spinner';
-import { setHouses } from '../store/features/houseSlice';
+import { setHouses, fetchHouses } from '../store/features/houseSlice';
 import { useDispatch } from 'react-redux';
 
 const House = (props) => {
@@ -24,20 +24,21 @@ const House = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('/cdn.number8.com/LA/listings.json')
-            .then((response) => response.json())
-            .then((response) => {
-                dispatch(setHouses(response));
-                setFilteredData(response ?? []);
-                let maxPrice = getMaxPrice(response);
-                setMaxPrice(maxPrice);
-                setFilter({ ...filter, price: maxPrice });
-                setLoading(false);
-            })
-            .catch((error) => {
-                setLoading(false);
-                alert(error.message);
-            });
+        dispatch(fetchHouses({
+                callback: (response) => {
+                    dispatch(setHouses(response));
+                    setFilteredData(response ?? []);
+                    let maxPrice = getMaxPrice(response);
+                    setMaxPrice(maxPrice);
+                    setFilter({ ...filter, price: maxPrice });
+                    setLoading(false);
+                },
+                catch: (error) => {
+                    setLoading(false);
+                    alert(error.message);
+                }
+            }
+        ));
     }, []);
 
     const cardItems = () => {
@@ -47,7 +48,7 @@ const House = (props) => {
         return filteredData.map((item) =>
             <Card key={item.Id} item={item} setSelectedHouse={setSelectedHouse} />
         );
-    }; 
+    };
 
     const getMaxPrice = (list) => {
         if (list) {
