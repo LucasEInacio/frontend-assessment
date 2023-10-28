@@ -1,0 +1,96 @@
+.app-header {
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.divFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 80vh;
+    padding: 30px 50px 20px 50px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+nav {
+    @extend .divFlex;
+    justify-content: space-around;
+    width: 100%;
+    color: white;
+
+    .logo {
+        font-size: 30px;
+        text-transform: uppercase;
+    }
+
+    ul {
+        @extend .divFlex;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            font-size: 16px;
+            margin-left: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            color: rgba(white, .7);
+            cursor: pointer;
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+
+            li:hover {
+                background-color: #3d4554;
+                transform: scale(1.1);
+                border-radius: 10px;
+            }
+    }
+}
+
+.logo {
+    width: 50px;
+}
+
+.footer {
+    @extend .divFlex;
+    width: 100%;
+    min-height: 10vh;
+    justify-content: space-between;
+    margin-top: auto;
+    color: white;
+
+    .footerItem {
+        width: 50%;
+
+        h3 {
+            font-size: 11px;
+        }
+    }
+}
+
+.modalStyle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+    padding: 20px;
+}

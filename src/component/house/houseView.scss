@@ -1,0 +1,167 @@
+.houseView {
+    display: flex;
+    color: white;
+}
+
+.housePanel {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .panelHeaderLeft {
+        width: 50%;
+        text-align: left;
+    }
+
+    .panelHeaderRight {
+        width: 50%;
+        text-align: right;
+    }
+
+    .panelImg {
+        width: 100%;
+    }
+
+    .panelTable {
+        width: 100%;
+        display: flex;
+        border: 1px solid white;
+
+        .panelItem {
+            width: 20%;
+        }
+    }
+
+    .panelDescription {
+        text-align: left;
+    }
+}
+
+.contact {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: start;
+}
+
+.likeDiv {
+    text-align: right;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.saveBtn {
+    margin-right: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contactForm {
+    border: 1px solid white;
+    width: 90%;
+    height: 400px;
+}
+
+.contactBtn {
+    @extend .saveBtn;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formField {
+    width: 80%;
+    height: 30px;
+    margin: 15px;
+}
+
+.formFieldMultiline {
+    @extend .formField;
+    height: 100px;
+}
+
+.unlikeBtn {
+    color: black;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.filterBtn {
+    margin-right: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    overflow: hidden;
+}
+
+.filter {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    .filterItem {
+        margin: 0px 20px;
+
+        button {
+            @extend .filterBtn;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+    }
+
+    .filterButtons {
+        width: 100%;
+    }
+
+    .priceRange {
+        width: 150px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .numberInput {
+        width: 50px
+    }
+
+    p {
+        margin-right: 10px;
+        display: inline-block;
+    }
+}
+
+.filterBtn:hover {
+    background-color: #3d4554;
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: orange;
+    color: white;
+}

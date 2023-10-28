@@ -1,0 +1,73 @@
+.divFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 30%;
+    border-radius: 15px;
+    @extend .divFlex;
+    flex-direction: column;
+    position: relative;
+    transform: scale(.8);
+    transition: all .3s ease-in-out;
+    margin-bottom: 50px;
+
+    .cardImg {
+        margin-top: -5vw;
+
+        img {
+            width: 200px;
+        }
+    }
+
+    .cardHeader {
+        @extend .divFlex;
+        flex-direction: column;
+        color: white;
+        margin: 25px 0;
+
+        h3 {
+            font-size: 18px;
+            position: relative;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+            color: rgba(white, .3);
+            margin: 8px 0;
+        }
+
+        .price {
+            font-size: 25px;
+            color: orange;
+            vertical-align: top;
+        }
+    }
+
+    .btn {
+        width: 130px;
+        height: 35px;
+        font-size: 14px;
+        border-radius: 35px;
+        border-width: 0;
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+        transition: background-color .3s ease;
+        overflow: hidden;
+    }
+}
+
+.card:hover {
+    background-color: #3d4554;
+    transform: scale(1.1);
+    cursor: pointer;
+
+    .btn {
+        background-color: orange;
+        color: white;
+    }
+}
