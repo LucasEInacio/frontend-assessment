@@ -38,36 +38,6 @@
     overflow: hidden;
 }
 
-.filter{
-    width:80%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    .filterItem{
-        width:20%;
-        button {
-            @extend .filterBtn;
-        }
-        button:hover {
-            background-color: orange;
-        }
-    }
-    .priceRange {
-        width: 150px;
-        display: inline-block;
-        vertical-align: middle;
-    }
-    .numberInput{
-        width: 50px
-    }
-    p{
-        margin-right: 10px;
-        display:inline-block;
-    }
-}
-
 .title{
     color: white;
 }

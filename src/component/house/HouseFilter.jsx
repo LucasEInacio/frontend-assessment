@@ -1,6 +1,7 @@
 import React from "react";
 import { Slider } from '@mui/material';
 import { useSelector } from 'react-redux';
+import './houseView.scss';
 
 const HouseFilter = (props) => {
     const houses = useSelector((state) => state.house.houses);
@@ -64,9 +65,9 @@ const HouseFilter = (props) => {
                     onChange={(event) => props.setFilter({ ...props.filter, price: event.target.value })} >
                 </Slider>
             </div>
-            <div className='filterItem'>
-                <button onClick={search}>Search</button>
-                <button onClick={clearSearch}>Clear</button>
+            <div className='filterButtons'>
+                <button className='filterBtn' onClick={search}>Search</button>
+                <button className='filterBtn' onClick={clearSearch}>Clear</button>
             </div>
         </div>
     );

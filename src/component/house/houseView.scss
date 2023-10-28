@@ -1,4 +1,4 @@
-.houseView{
+.houseView {
     display: flex;
     color: white;
 }
@@ -33,7 +33,7 @@
         }
     }
 
-    .panelDescription{
+    .panelDescription {
         text-align: left;
     }
 }
@@ -102,4 +102,66 @@
     background-color: none;
     cursor: pointer;
     margin-left: 10px;
+}
+
+.filterBtn {
+    margin-right: 10px;
+    width: 130px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 35px;
+    border-width: 0;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    overflow: hidden;
+}
+
+.filter {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    .filterItem {
+        margin: 0px 20px;
+
+        button {
+            @extend .filterBtn;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+    }
+
+    .filterButtons {
+        width: 100%;
+    }
+
+    .priceRange {
+        width: 150px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .numberInput {
+        width: 50px
+    }
+
+    p {
+        margin-right: 10px;
+        display: inline-block;
+    }
+}
+
+.filterBtn:hover {
+    background-color: #3d4554;
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: orange;
+    color: white;
 }
