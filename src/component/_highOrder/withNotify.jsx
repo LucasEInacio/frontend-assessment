@@ -12,7 +12,8 @@ const WithNotify = (WrappedComponent) => {
         
         state = {
             error: '',
-            severity: ''
+            severity: '',
+            open: false
         };
 
         handleClose = (event, reason) => {
@@ -20,18 +21,18 @@ const WithNotify = (WrappedComponent) => {
                 return;
             }
 
-            this.setState({ ...this.state, error: '', severity: '' });
+            this.setState({ ...this.state, open: false });
         };
 
         notify = (message, severity) => {
-            this.setState({ ...this.state, error: message, severity: severity });
+            this.setState({ ...this.state, error: message, severity: severity, open: true });
         }
 
         render() {
             return (
                 <Fragment>
                     <Snackbar
-                        open={!!this.state.error}
+                        open={this.state.open}
                         autoHideDuration={6000}
                         message={this.state.errorMessage}
                         onClose={this.handleClose}
