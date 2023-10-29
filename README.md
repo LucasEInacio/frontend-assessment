@@ -33,3 +33,10 @@ Then run npm start.
 ## Credits
 
 I would like to thank Number8 for the opportunity to participate in the process! I am glad to deliver all the required specifications and the bonus, and count on me to clarify any doubts.
+
+## Screen Prints
+
+![Houses List Page](./public/images/HousesList.jpg)
+![House View Page](./public/images/HousesView.jpg)
+![Form Sent](./public/images/FormSent.jpg)
+![Save Houses](./public/images/SavedHouses.jpg)
