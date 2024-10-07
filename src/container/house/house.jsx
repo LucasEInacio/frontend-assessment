@@ -15,7 +15,7 @@ const House = (props) => {
         bedrooms: '',
         bathrooms: '',
         parking: '',
-        price: 0
+        price: [0, 0]
     });
     const [maxPrice, setMaxPrice] = useState(0);
     const [selectedHouse, setSelectedHouse] = useState(null);
@@ -30,7 +30,7 @@ const House = (props) => {
                     setFilteredData(response ?? []);
                     let maxPrice = getMaxPrice(response);
                     setMaxPrice(maxPrice);
-                    setFilter({ ...filter, price: maxPrice });
+                    setFilter({ ...filter, price: [0, maxPrice] });
                     setLoading(false);
                 },
                 catch: (error) => {
